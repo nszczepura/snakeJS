@@ -1,4 +1,4 @@
-//Classic snake written in JavaScript
+//classic snake written in JavaScript
 //@author Nicholas Szczepura
 
 var canvas = document.getElementById("snake");
