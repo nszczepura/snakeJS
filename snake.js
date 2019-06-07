@@ -1,3 +1,6 @@
+//Classic snake written in JavaScript
+//@author Nicholas Szczepura
+
 var canvas = document.getElementById("snake");
 var context = canvas.getContext("2d");
 var Snake;
@@ -31,6 +34,9 @@ var step = function() {
     animate(step);
 };
 
+//in substitute of using a sleep function
+//the game updates the snake every 3 frames
+//this is to keep the game at a playable speed
 var update = function() {
     if(frame % 3 == 0) Snake.update(direction);
     if(Snake.collision(canvas.clientWidth, canvas.clientHeight)) reset();
@@ -52,9 +58,9 @@ function update_direction() {
             direction = "up";
         } else if(value == 40) { //down arrow
             direction = "down";
-        } else if(value == 37) { //right arrow
+        } else if(value == 37) { //left arrow
             direction = "left";
-        } else if(value == 39) { //left arrow
+        } else if(value == 39) { //right arrow
             direction = "right";
         }
     }
