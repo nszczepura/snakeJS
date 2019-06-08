@@ -28,7 +28,6 @@ window.addEventListener("keyup", function(event) {
 });
 
 var step = function() {
-    update_direction();
     update();
     render();
     animate(step);
@@ -38,6 +37,7 @@ var step = function() {
 //the game updates the snake every 3 frames
 //this is to keep the game at a playable speed
 var update = function() {
+    update_direction();
     if(frame % 3 == 0) Snake.update(direction);
     if(Snake.collision(canvas.clientWidth, canvas.clientHeight)) reset();
     frame++;
