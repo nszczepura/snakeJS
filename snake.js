@@ -1,4 +1,4 @@
-//classic snake written in JavaScript
+//Classic snake written in JavaScript
 //@author Nicholas Szczepura
 
 var canvas = document.getElementById("snake");
@@ -82,12 +82,11 @@ function apple(size) {
     this.x;
     this.y;
     this.size = size;
-}
 
     //places the apple randomly on the canvas
     //@param width of the canvas in pixels
     //@param height of the canvas in pixels
-    apple.prototype.update = function(canvas_width, canvas_height) {
+    this.update = function(canvas_width, canvas_height) {
         var random = Math.random() * (canvas.clientWidth - 40);
         randomMultiple = random - (random % 20) + 40;
         this.x = randomMultiple;
@@ -96,10 +95,11 @@ function apple(size) {
         this.y = randomMultiple;
     }   
 
-    apple.prototype.render = function() {
+    this.render = function() {
         context.fillStyle = "red";
         context.fillRect(this.x, this.y, this.size, this.size);
     }
+}
 
 //square that makes part of a snake
 //@param x position on canvas
@@ -109,24 +109,23 @@ function snake_block(x, y, size) {
     this.x = x;
     this.y = y;
     this.size = size;
-}
 
-    snake_block.prototype.render = function() {
+    this.render = function() {
         context.fillStyle = "#19ff4f";
         context.fillRect(this.x, this.y, this.size, this.size);
     }
+}
 
 //creates a queue that will keep track of blocks that make up the snake
 //@param size of each side of a snake block in pixels
 function snake(size) {
     this.snake = [];
     this.size = size;
-}
 
     //initializes the snake in the middle of the canvas
     //@param canvas width in pixels
     //@param canvas height in pixels
-    snake.prototype.init = function(canvas_width, canvas_height) {
+    this.init = function(canvas_width, canvas_height) {
         for(i = 0; i < 4; i++){
             this.snake.push(new snake_block((canvas_width / 2) + (this.size * i), (canvas_height / 2), this.size));
         }
@@ -136,7 +135,7 @@ function snake(size) {
     //@param canvas width in pixels
     //@param canvas height in pixels
     //@return true if collision occured, false otherwise.
-    snake.prototype.collision = function(canvas_width, canvas_height) {
+    this.collision = function(canvas_width, canvas_height) {
         if(this.snake[0].x < 0 || this.snake[0].x > canvas_width) return true;
         else if(this.snake[0].y < 0 || this.snake[0].y > canvas_height) return true;
         else {
@@ -148,12 +147,11 @@ function snake(size) {
         return false;
     }
 
-
     //uses a queue to update the snakes position
     //the tail is dequeued and a new block (placed where the head is facing)
     //is created and queued.
     //@param direction of head as a string
-    snake.prototype.update = function(direction) {
+    this.update = function(direction) {
         var head = this.snake[0];
         if(head.x == Apple.x && head.y == Apple.y) Apple.update();
         else this.snake.pop();
@@ -173,11 +171,12 @@ function snake(size) {
         this.snake.unshift(new_block);
     }
 
-    snake.prototype.render = function() {
+    this.render = function() {
         for(i = 0; i < this.snake.length; i++) {
             this.snake[i].render();
         }
     }
+}
     
 //initialize variables for first iteration   
 reset();
